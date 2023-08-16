@@ -55,29 +55,29 @@
             border: 1px solid var(--bs-secondary-color);
         }
     </style>
-    <script>
-         function formatIPList() {
-            var inputElement = document.getElementById("ipInput");
-            var ipList = inputElement.value.split("\n");
-            var formattedList = ipList.join("#");
-            
-            var outputElement = document.getElementById("formattedOutput");
-            outputElement.textContent = formattedList;
-            
-            var copyButton = document.getElementById("copyButton");
-            copyButton.style.display = "block";
-            copyButton.setAttribute("data-clipboard-text", formattedList);
-        }
-        
-        function copyFormattedList() {
-            var clipboardText = document.getElementById("copyButton").getAttribute("data-clipboard-text");
-            navigator.clipboard.writeText(clipboardText).then(function() {
-                alert("Lista formatada copiada com sucesso!");
-            }).catch(function(error) {
-                alert("Erro ao copiar a lista formatada: " + error);
-            });
-        }
-    </script>
+    <script> 
+         function formatIPList() { 
+            var inputElement = document.getElementById("ipInput"); 
+            var inputValue = inputElement.value.replace(/[ ,;\n]/g, '#'); 
+            var formattedList = inputValue.replace(/##+/g, '#').replace(/^#|#$|\n$/g, ''); // Remover hashtags extras e quebra de linha 
+ 
+            var outputElement = document.getElementById("formattedOutput"); 
+            outputElement.textContent = formattedList; 
+ 
+            var copyButton = document.getElementById("copyButton"); 
+            copyButton.style.display = "block"; 
+            copyButton.setAttribute("data-clipboard-text", formattedList); 
+        } 
+ 
+        function copyFormattedList() { 
+            var clipboardText = document.getElementById("copyButton").getAttribute("data-clipboard-text"); 
+            navigator.clipboard.writeText(clipboardText).then(function() { 
+                alert("Lista formatada copiada com sucesso!"); 
+            }).catch(function(error) { 
+                alert("Erro ao copiar a lista formatada: " + error); 
+            }); 
+        } 
+    </script> 
 </head>
 <body>
     <h1>Formatar e Copiar Lista de IPs</h1>
